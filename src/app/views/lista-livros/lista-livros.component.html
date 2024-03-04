@@ -1,17 +1,16 @@
 <section class="container">
   <header>Que livro você procura?</header>
   <div class="busca">
-    <input type="search" [(ngModel)]="searchField" />
+    <input type="search" [formControl]="searchField" />
     <button>
       <img
         src="assets/imagens/icone-busca.png"
         alt="Lupa de cor roxa"
-        (click)="searchBooks()"
       />
     </button>
   </div>
   <p>Busque por assunto, autoria, nome...</p>
-  <div class="container-card" *ngIf="listaLivros?.length > 0; else telaInicial">
+  <div class="container-card" *ngIf="foundBooks$ | async as listaLivros; else telaInicial">
     <div *ngFor="let livro of listaLivros">
       <app-livro [livro]="livro"></app-livro>
     </div>
